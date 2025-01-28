@@ -3,19 +3,21 @@ package com.addressbook.addressbookdevelopment.dto;
 
 import lombok.AllArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import lombok.Data;
 
+@Data
 @AllArgsConstructor
 public class AddressBookDto {
 
-    @NotEmpty(message = "Employee Firstname cannot be null!!!")
+    @NotEmpty(message = "Firstname cannot be null!!!")
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$",message = "FirstName is Invalid!!")
     public String firstName;
-    @NotEmpty(message = "Employee Lastname cannot be null!!!")
+    @NotEmpty(message = "Lastname cannot be null!!!")
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$",message = "LastName is Invalid!!")
     public String lastName;
-    @NotEmpty(message = "Address feild cannot be empty..")
+    @NotEmpty(message = "Address field cannot be empty..")
     public String address;
    // @NotEmpty(message = "Please enter your mobile number")
     public long phoneNum;
