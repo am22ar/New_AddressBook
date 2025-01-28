@@ -9,13 +9,13 @@ import com.addressbook.addressbookdevelopment.model.AddressBookModel;
 import com.addressbook.addressbookdevelopment.model.EmailModel;
 import com.addressbook.addressbookdevelopment.service.IAddressBookService;
 import com.addressbook.addressbookdevelopment.service.IEmailService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,15 +60,13 @@ public class AddressBookController {
     public ResponseEntity<ResponseDto> getByToken(@PathVariable String token){
         AddressBookModel addressBookModel = addressBookService.getByToken(token);
         ResponseDto responseDto = new ResponseDto("Data of Given Token: ",addressBookModel,token);
-        ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDto,HttpStatus.OK);
-        return response;
+        return new ResponseEntity<>(responseDto,HttpStatus.OK);
     }
     @GetMapping("/getAll")
     public ResponseEntity<ResponseDto> getAll() throws AddressBookException{
         List<AddressBookModel> addressBookModel = addressBookService.getAll();
         ResponseDto responseDto = new ResponseDto("Fetch all data: ",addressBookModel,null);
-        ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDto, HttpStatus.OK);
-        return response;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
 //        list.add(addressBookService.getAll());
 //        return addressBookService.getAll();
     }
@@ -76,8 +74,7 @@ public class AddressBookController {
     public ResponseEntity<ResponseDto> updateById(@PathVariable int personId, @Valid @RequestBody AddressBookDto addressBookDto) throws AddressBookException {
         AddressBookModel addressBookModel = addressBookService.updateById(personId,addressBookDto);
         ResponseDto responseDto = new ResponseDto("Updated Data: ",addressBookModel,null);
-        ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDto, HttpStatus.OK);
-        return response;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
 //        list.add(addressBookService.updateById(personId,addressBookDto));
 //        return addressBookService.updateById(personId,addressBookDto);
     }
@@ -86,15 +83,13 @@ public class AddressBookController {
         //passing id along with token because we are not saving the token generated in database
         AddressBookModel addressBookModel = addressBookService.updateByToken(personId,token,addressBookDto);
         ResponseDto responseDto = new ResponseDto("Update By Token: ",addressBookModel,token);
-        ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDto, HttpStatus.OK);
-        return response;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
     @DeleteMapping("/deleteById")
     public ResponseEntity<ResponseDto> deleteById(@RequestParam int personId)throws AddressBookException{
         AddressBookModel addressBookModel = addressBookService.deleteById(personId);
         ResponseDto responseDto = new ResponseDto("Deleted Data: ",addressBookModel,null);
-        ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDto, HttpStatus.OK);
-        return response;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
 //        list.add(addressBookService.deleteById(personId));
 //        addressBookService.deleteById(personId);
 //        return "Deletion Success...";
@@ -104,7 +99,6 @@ public class AddressBookController {
         List<String> list1= null;
         list1 = addressBookService.findByCity(city);
         ResponseDto responseDto = new ResponseDto("Employee of Specific City!!!",list1,null);
-        ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDto, HttpStatus.OK);
-        return response;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
